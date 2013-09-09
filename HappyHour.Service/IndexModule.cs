@@ -1,10 +1,10 @@
-﻿namespace HappyHour.Service
-{
-    using HappyHour.Service.Models;
-    using Nancy;
-    using RestSharp;
-    using System.Collections.Generic;
+﻿using HappyHour.Service.Models;
+using Nancy;
+using RestSharp;
+using System.Collections.Generic;
 
+namespace HappyHour.Service
+{
     public class IndexModule : NancyModule
     {
         public IndexModule()
