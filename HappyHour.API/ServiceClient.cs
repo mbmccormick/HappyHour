@@ -25,14 +25,14 @@ namespace HappyHour.API
             _serverAddress = serverAddress;
         }
 
-        public void GetVenues(Action<List<Item>> callback, double latitude, double longitude)
+        public void GetVenues(Action<ExploreResponse> callback, double latitude, double longitude)
         {
             RestClient client = new RestClient("http://" + _serverAddress);
 
             RestRequest request = new RestRequest("/api/v1/venues", Method.GET);
             request.AddParameter("location", latitude + "," + longitude);
 
-            client.ExecuteAsync<List<Item>>(request, (response) =>
+            client.ExecuteAsync<ExploreResponse>(request, (response) =>
             {
                 callback(response.Data);
             });
