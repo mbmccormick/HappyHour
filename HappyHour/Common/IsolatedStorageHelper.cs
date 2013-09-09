@@ -19,7 +19,7 @@ using System.IO.IsolatedStorage;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace HackerNews.Common
+namespace HappyHour.Common
 {
     public static class IsolatedStorageHelper
     {

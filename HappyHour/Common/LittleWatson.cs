@@ -13,7 +13,7 @@ using System.IO;
 using Microsoft.Phone.Tasks;
 using Microsoft.Phone.Controls;
 
-namespace HackerNews.Common
+namespace HappyHour.Common
 {
     public class LittleWatson
     {

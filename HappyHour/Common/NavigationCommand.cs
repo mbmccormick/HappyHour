@@ -10,7 +10,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Tasks;
 
-namespace HackerNews.Common
+namespace HappyHour.Common
 {
     public class NavigationCommand : ICommand
     {
