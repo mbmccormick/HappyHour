@@ -7,34 +7,46 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using System.Device.Location;
+using HappyHour.Common;
+using System.Collections.ObjectModel;
+using HappyHour.API.Models;
 
 namespace HappyHour
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        public static ObservableCollection<Item> Venues { get; set; }
+        private GeoCoordinateWatcher locationService = null;
+
         // Constructor
         public MainPage()
         {
             InitializeComponent();
+            Venues = new ObservableCollection<Item>(); 
 
-            // Sample code to localize the ApplicationBar
-            //BuildLocalizedApplicationBar();
+            locationService = new GeoCoordinateWatcher(GeoPositionAccuracy.High); 
         }
 
-        // Sample code for building a localized ApplicationBar
-        //private void BuildLocalizedApplicationBar()
-        //{
-        //    // Set the page's ApplicationBar to a new instance of ApplicationBar.
-        //    ApplicationBar = new ApplicationBar();
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            locationService.Start(); 
+        }
 
-        //    // Create a new button and set the text value to the localized string from AppResources.
-        //    ApplicationBarIconButton appBarButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.add.rest.png", UriKind.Relative));
-        //    appBarButton.Text = AppResources.AppBarButtonText;
-        //    ApplicationBar.Buttons.Add(appBarButton);
+        private void LoadData()
+        {
+            App.HappyHourClient.GetVenues((result) =>
+                {
+                    SmartDispatcher.BeginInvoke(() =>
+                    {
+                        Venues.Clear();
 
-        //    // Create a new menu item with the localized string from AppResources.
-        //    ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarMenuItemText);
-        //    ApplicationBar.MenuItems.Add(appBarMenuItem);
-        //}
+                        foreach (Item i in result)
+                        {
+                            Venues.Add(i); 
+                        }
+                    });
+                }, locationService.Position.Location.Latitude, locationService.Position.Location.Longitude);
+        }
     }
 }
