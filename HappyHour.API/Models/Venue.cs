@@ -26,5 +26,26 @@ namespace HappyHour.API.Models
         public HereNow hereNow { get; set; }
         public Price price { get; set; }
         public string storeId { get; set; }
+
+        public string FriendlyAddress
+        {
+            get
+            {
+                return location.address + ", " + location.city + " " + location.state + " " + location.postalCode;
+            }
+        }
+
+        public string FriendlyDistance
+        {
+            get
+            {
+                double value = Math.Round((location.distance / 1609.34), 1);
+
+                if (value == 1.0)
+                    return Math.Round((location.distance / 1609.34), 1) + " mile away";
+                else
+                    return Math.Round((location.distance / 1609.34), 1) + " miles away";
+            }
+        }
     }
 }

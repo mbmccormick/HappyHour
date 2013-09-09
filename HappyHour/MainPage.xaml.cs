@@ -34,7 +34,7 @@ namespace HappyHour
 
             locationService = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
 
-            locationService.MovementThreshold = 1000;
+            locationService.MovementThreshold = 500;
             locationService.PositionChanged += locationService_PositionChanged;
         }
 
@@ -54,21 +54,26 @@ namespace HappyHour
             {
                 SmartDispatcher.BeginInvoke(() =>
                 {
+                    this.txtNeighborhood.Text = result.headerLocation.ToUpper();
+
                     Venues.Clear();
 
-                    List<Item> results = new List<Item>();
-
-                    foreach (var group in result.groups)
+                    if (result.groups != null)
                     {
-                        foreach (var item in group.items)
+                        List<Item> results = new List<Item>();
+
+                        foreach (var group in result.groups)
                         {
-                            results.Add(item);
+                            foreach (var item in group.items)
+                            {
+                                results.Add(item);
+                            }
                         }
-                    }
 
-                    foreach (Item i in results.OrderBy(z => z.venue.location.distance))
-                    {
-                        Venues.Add(i);
+                        foreach (Item i in results.OrderBy(z => z.venue.location.distance))
+                        {
+                            Venues.Add(i);
+                        }
                     }
 
                     isLoaded = true;

@@ -21,8 +21,8 @@
         </Grid.RowDefinitions>
 
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="HAPPY HOUR" Style="{StaticResource PhoneTextNormalStyle}" FontSize="{StaticResource PhoneFontSizeMedium}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Margin="12,0" />
-            <TextBlock Text="nearby" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="txtNeighborhood" Style="{StaticResource PhoneTextNormalStyle}" FontSize="{StaticResource PhoneFontSizeMedium}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Margin="12,0" />
+            <TextBlock Text="happy hour" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <ProgressBar Name="prgLoading" Foreground="{StaticResource PhoneAccentBrush}" IsIndeterminate="True" Margin="0,0,0,0" VerticalAlignment="Top" />
@@ -32,8 +32,9 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Margin="0,0,0,18" Orientation="Vertical">
-                            <TextBlock Text="{Binding venue.name}" Style="{StaticResource PhoneTextExtraLargeStyle}" />
-                            <TextBlock Text="{Binding venue.location.address}" Style="{StaticResource PhoneTextNormalStyle}" />
+                            <TextBlock Text="{Binding venue.name}" Style="{StaticResource PhoneTextLargeStyle}" />
+                            <TextBlock Text="{Binding venue.FriendlyAddress}" Style="{StaticResource PhoneTextNormalStyle}" Foreground="{StaticResource PhoneAccentBrush}" />
+                            <TextBlock Text="{Binding venue.FriendlyDistance}" Style="{StaticResource PhoneTextSmallStyle}" Foreground="{StaticResource PhoneForegroundBrush}" />
                             <TextBlock Text="{Binding tips[0].text}" Style="{StaticResource PhoneTextSmallStyle}" />
                         </StackPanel>
                     </DataTemplate>
