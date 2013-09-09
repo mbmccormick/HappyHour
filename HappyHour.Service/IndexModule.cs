@@ -21,13 +21,13 @@
 
                 var response = client.Execute<Models.Response>(request);
 
-                List<Venue> results = new List<Venue>();
+                List<Item> results = new List<Item>();
 
                 foreach (var group in response.Data.response.groups)
                 {
                     foreach (var item in group.items)
                     {
-                        results.Add(item.venue);
+                        results.Add(item);
                     }
                 }
 
