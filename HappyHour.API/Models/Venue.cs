@@ -39,12 +39,12 @@ namespace HappyHour.API.Models
         {
             get
             {
-                double value = Math.Round((location.distance / 1609.34), 1);
+                double value = Math.Round((location.distance / 1609.34), 2);
 
-                if (value == 1.0)
-                    return Math.Round((location.distance / 1609.34), 1) + " mile away";
+                if (value == 1.00)
+                    return value + " mile away";
                 else
-                    return Math.Round((location.distance / 1609.34), 1) + " miles away";
+                    return value + " miles away";
             }
         }
     }
