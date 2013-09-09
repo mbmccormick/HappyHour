@@ -2,6 +2,7 @@
 using Nancy;
 using RestSharp;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HappyHour.Service
 {
@@ -31,7 +32,7 @@ namespace HappyHour.Service
                     }
                 }
 
-                return Response.AsJson(results);
+                return Response.AsJson(results.OrderBy(z => z.venue.location.distance));
             };
         }
     }
