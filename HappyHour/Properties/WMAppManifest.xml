@@ -2,7 +2,7 @@
 
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US"/>
-  <App xmlns="" ProductID="{52a3ca5f-9edc-49e6-838c-4a2d83f6bd54}" Title="HappyHour" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="HappyHour author" Description="Sample description" Publisher="HappyHour" PublisherID="{c99c01be-6403-4652-ad5e-c7c0911824aa}">
+  <App xmlns="" ProductID="{df149dd6-fc89-47d0-89bf-274bc1cfc825}" Title="HappyHour" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="HappyHour author" Description="Sample description" Publisher="HappyHour" PublisherID="{9d740edc-a7d2-4850-8a72-9a2407c82692}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING"/>
