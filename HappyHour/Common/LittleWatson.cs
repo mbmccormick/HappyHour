@@ -80,9 +80,9 @@ namespace HappyHour.Common
                         {
                             case CustomMessageBoxResult.LeftButton:
                                 EmailComposeTask email = new EmailComposeTask();
-                                email.To = App.FeedbackEmailAddress;
+                                //email.To = App.FeedbackEmailAddress;
                                 email.Subject = "Hacker News Error Report";
-                                email.Body = "Version " + App.ExtendedVersionNumber + " (" + App.PlatformVersionNumber + ")\n" + contents;
+                                //email.Body = "Version " + App.ExtendedVersionNumber + " (" + App.PlatformVersionNumber + ")\n" + contents;
 
                                 SafeDeleteFile(IsolatedStorageFile.GetUserStoreForApplication());
 

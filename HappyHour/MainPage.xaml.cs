@@ -30,7 +30,8 @@ namespace HappyHour
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            locationService.Start(); 
+            locationService.Start();
+            LoadData(); 
         }
 
         private void LoadData()
@@ -45,6 +46,8 @@ namespace HappyHour
                         {
                             Venues.Add(i); 
                         }
+
+                        VenueList.ItemsSource = Venues;
                     });
                 }, locationService.Position.Location.Latitude, locationService.Position.Location.Longitude);
         }
