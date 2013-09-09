@@ -16,7 +16,7 @@ namespace HappyHour
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        #region List Properties
+        #region Databinding Properties
 
         public static ObservableCollection<Item> Venues { get; set; }
 
