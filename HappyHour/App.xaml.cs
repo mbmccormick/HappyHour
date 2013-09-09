@@ -39,6 +39,7 @@ namespace HappyHour
 
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            SmartDispatcher.Initialize(RootFrame.Dispatcher);
         }
 
         private void Application_Activated(object sender, ActivatedEventArgs e)
