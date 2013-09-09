@@ -29,9 +29,13 @@ namespace HappyHour
         public MainPage()
         {
             InitializeComponent();
+
             Venues = new ObservableCollection<Item>();
 
             locationService = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
+
+            locationService.MovementThreshold = 1000;
+            locationService.PositionChanged += locationService_PositionChanged;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -80,6 +84,13 @@ namespace HappyHour
                 this.txtEmpty.Visibility = System.Windows.Visibility.Visible;
             else
                 this.txtEmpty.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        private void locationService_PositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
+        {
+            isLoaded = false;
+
+            LoadData();
         }
     }
 }
