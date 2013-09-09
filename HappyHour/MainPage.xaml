@@ -39,10 +39,10 @@
                             </Grid.ColumnDefinitions>
 
                             <Canvas Grid.Column="0" Margin="0,8,0,0">
-                                <Rectangle Width="36" Height="36" Fill="{StaticResource PhoneForegroundBrush}" />
-                                <Polygon Points="0,36 36,36, 0,72" Fill="{StaticResource PhoneForegroundBrush}" />
+                                <Rectangle Width="30" Height="30" Fill="{StaticResource PhoneForegroundBrush}" />
+                                <Polygon Points="0,30 30,30, 0,60" Fill="{StaticResource PhoneForegroundBrush}" />
                             </Canvas>
-                            <TextBlock Grid.Column="0" Text="{Binding Index}" Margin="0,8,12,0" Width="36" TextAlignment="Center" Style="{StaticResource PhoneTextTitle3Style}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Foreground="{StaticResource PhoneBackgroundBrush}" />
+                            <TextBlock Grid.Column="0" Text="{Binding Index}" Margin="0,8,12,0" Width="30" TextAlignment="Center" Style="{StaticResource PhoneTextTitle3Style}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Foreground="{StaticResource PhoneBackgroundBrush}" />
 
                             <StackPanel Grid.Column="1">
                                 <TextBlock Text="{Binding venue.name}" Style="{StaticResource PhoneTextLargeStyle}" />
