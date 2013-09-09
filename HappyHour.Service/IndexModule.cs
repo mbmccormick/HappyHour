@@ -22,17 +22,9 @@ namespace HappyHour.Service
 
                 var response = client.Execute<Models.Response>(request);
 
-                List<Item> results = new List<Item>();
-
-                foreach (var group in response.Data.response.groups)
-                {
-                    foreach (var item in group.items)
-                    {
-                        results.Add(item);
-                    }
-                }
-
-                return Response.AsJson(results.OrderBy(z => z.venue.location.distance));
+                var data = response.Data.response;
+                
+                return Response.AsJson(data);
             };
         }
     }
