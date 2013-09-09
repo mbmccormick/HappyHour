@@ -47,5 +47,13 @@ namespace HappyHour.API.Models
                     return value + " miles away";
             }
         }
+
+        public double FriendlyRating
+        {
+            get
+            {
+                return (rating / 2);
+            }
+        }
     }
 }

@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -16,12 +17,12 @@
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="txtNeighborhood" Style="{StaticResource PhoneTextNormalStyle}" FontSize="{StaticResource PhoneFontSizeMedium}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Margin="12,0" />
+            <TextBlock x:Name="txtNeighborhood" Text="NEARBY" Style="{StaticResource PhoneTextNormalStyle}" FontSize="{StaticResource PhoneFontSizeMedium}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Margin="12,0" />
             <TextBlock Text="happy hour" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
@@ -31,12 +32,26 @@
             <ListBox Name="lstVenues" ItemsSource="{Binding Venues}" Visibility="Collapsed">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Margin="0,0,0,18" Orientation="Vertical">
-                            <TextBlock Text="{Binding venue.name}" Style="{StaticResource PhoneTextLargeStyle}" />
-                            <TextBlock Text="{Binding venue.FriendlyAddress}" Style="{StaticResource PhoneTextNormalStyle}" Foreground="{StaticResource PhoneAccentBrush}" />
-                            <TextBlock Text="{Binding venue.FriendlyDistance}" Style="{StaticResource PhoneTextSmallStyle}" Foreground="{StaticResource PhoneForegroundBrush}" />
-                            <TextBlock Text="{Binding tips[0].text}" Style="{StaticResource PhoneTextSmallStyle}" />
-                        </StackPanel>
+                        <Grid Margin="12,0,0,18">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Canvas Grid.Column="0" Margin="0,8,0,0">
+                                <Rectangle Width="36" Height="36" Fill="{StaticResource PhoneForegroundBrush}" />
+                                <Polygon Points="0,36 36,36, 0,72" Fill="{StaticResource PhoneForegroundBrush}" />
+                            </Canvas>
+                            <TextBlock Grid.Column="0" Text="{Binding Index}" Margin="0,8,12,0" Width="36" TextAlignment="Center" Style="{StaticResource PhoneTextTitle3Style}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Foreground="{StaticResource PhoneBackgroundBrush}" />
+
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="{Binding venue.name}" Style="{StaticResource PhoneTextLargeStyle}" />
+                                <TextBlock Text="{Binding venue.FriendlyAddress}" Style="{StaticResource PhoneTextNormalStyle}" Foreground="{StaticResource PhoneAccentBrush}" />
+                                <TextBlock Text="{Binding venue.FriendlyDistance}" Style="{StaticResource PhoneTextSmallStyle}" Foreground="{StaticResource PhoneForegroundBrush}" />
+                                <TextBlock Text="{Binding tips[0].text}" Style="{StaticResource PhoneTextSmallStyle}" />
+                                <toolkit:Rating Value="{Binding venue.FriendlyRating}" AllowHalfItemIncrement="True" RatingItemCount="5" Width="125" Height="25" HorizontalAlignment="Left" Margin="9,0,0,0" ReadOnly="True" />
+                            </StackPanel>
+                        </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

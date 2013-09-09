@@ -10,5 +10,7 @@ namespace HappyHour.API.Models
         public Venue venue { get; set; }
         public List<Tip> tips { get; set; }
         public string referralId { get; set; }
+
+        public int Index { get; set; }
     }
 }

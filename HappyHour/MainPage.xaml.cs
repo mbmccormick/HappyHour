@@ -54,12 +54,12 @@ namespace HappyHour
             {
                 SmartDispatcher.BeginInvoke(() =>
                 {
-                    this.txtNeighborhood.Text = result.headerLocation.ToUpper();
-
                     Venues.Clear();
 
                     if (result.groups != null)
                     {
+                        this.txtNeighborhood.Text = result.headerLocation.ToUpper();
+
                         List<Item> results = new List<Item>();
 
                         foreach (var group in result.groups)
@@ -70,9 +70,13 @@ namespace HappyHour
                             }
                         }
 
-                        foreach (Item i in results.OrderBy(z => z.venue.location.distance))
+                        int i = 1;
+                        foreach (Item item in results.OrderBy(z => z.venue.location.distance))
                         {
-                            Venues.Add(i);
+                            item.Index = i;
+                            i++;
+
+                            Venues.Add(item);
                         }
                     }
 
