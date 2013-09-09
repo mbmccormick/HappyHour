@@ -56,7 +56,17 @@ namespace HappyHour
                 {
                     Venues.Clear();
 
-                    foreach (Item i in result)
+                    List<Item> results = new List<Item>();
+
+                    foreach (var group in result.groups)
+                    {
+                        foreach (var item in group.items)
+                        {
+                            results.Add(item);
+                        }
+                    }
+
+                    foreach (Item i in results.OrderBy(z => z.venue.location.distance))
                     {
                         Venues.Add(i);
                     }
