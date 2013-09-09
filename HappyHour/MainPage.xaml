@@ -29,8 +29,10 @@
             <ListBox Name="VenueList">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Margin="12,0,12,0" Orientation="Horizontal">
-                            <TextBlock Text="{Binding venue.name}" />
+                        <StackPanel Margin="0,0,0,18" Orientation="Vertical">
+                            <TextBlock Text="{Binding venue.name}" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+                            <TextBlock Text="{Binding venue.location.address}" Style="{StaticResource PhoneTextNormalStyle}" />
+                            <TextBlock Text="{Binding tips[0].text}" Style="{StaticResource PhoneTextSmallStyle}" />
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
