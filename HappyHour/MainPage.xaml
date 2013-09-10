@@ -39,8 +39,8 @@
                             </Grid.ColumnDefinitions>
 
                             <Canvas Grid.Column="0" Margin="0,8,0,0">
-                                <Rectangle Width="30" Height="30" Fill="{StaticResource PhoneForegroundBrush}" />
-                                <Polygon Points="0,30 30,30, 0,60" Fill="{StaticResource PhoneForegroundBrush}" />
+                                <Polygon Points="0,0 30,0 30,30 0,60" Fill="{StaticResource PhoneForegroundBrush}" />
+                                <Rectangle Width="30" Height="30" Fill="{StaticResource PhoneForegroundBrush}" Stroke="{StaticResource PhoneForegroundBrush}" />
                             </Canvas>
                             <TextBlock Grid.Column="0" Text="{Binding Index}" Margin="0,8,12,0" Width="30" TextAlignment="Center" Style="{StaticResource PhoneTextTitle3Style}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Foreground="{StaticResource PhoneBackgroundBrush}" />
 
