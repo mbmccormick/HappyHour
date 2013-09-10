@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using HappyHour.API.Models;
+using HappyHour.Common;
 
 namespace HappyHour
 {
@@ -28,67 +29,44 @@ namespace HappyHour
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //if (isLoaded == false)
-            //    LoadData();
+            if (isLoaded == false)
+                LoadData();
         }
 
-        //private void LoadData()
-        //{
-        //    this.prgLoading.Visibility = System.Windows.Visibility.Visible;
+        private void LoadData()
+        {
+            string id;
+            if (NavigationContext.QueryString.TryGetValue("id", out id))
+            {
+                this.prgLoading.Visibility = System.Windows.Visibility.Visible;
 
-        //    App.HappyHourClient.GetVenues((result) =>
-        //    {
-        //        SmartDispatcher.BeginInvoke(() =>
-        //        {
-        //            Venues.Clear();
+                CurrentVenue = MainPage.Venues[Convert.ToInt32(id)];
 
-        //            if (result.groups != null)
-        //            {
-        //                this.txtNeighborhood.Text = result.headerLocation.ToUpper();
+                SmartDispatcher.BeginInvoke(() =>
+                {
+                    this.txtName.Text = CurrentVenue.venue.name.ToUpper();
 
-        //                List<Item> results = new List<Item>();
+                    isLoaded = true;
 
-        //                foreach (var group in result.groups)
-        //                {
-        //                    foreach (var item in group.items)
-        //                    {
-        //                        results.Add(item);
-        //                    }
-        //                }
+                    ToggleLoadingText();
+                    ToggleEmptyText();
 
-        //                int i = 1;
-        //                foreach (Item item in results.OrderBy(z => z.venue.location.distance))
-        //                {
-        //                    item.Index = i;
-        //                    i++;
+                    this.prgLoading.Visibility = System.Windows.Visibility.Collapsed;
+                });
+            }
+        }
 
-        //                    Venues.Add(item);
-        //                }
-        //            }
+        private void ToggleLoadingText()
+        {
+            this.txtLoading.Visibility = System.Windows.Visibility.Collapsed;
+        }
 
-        //            isLoaded = true;
-
-        //            ToggleLoadingText();
-        //            ToggleEmptyText();
-
-        //            this.prgLoading.Visibility = System.Windows.Visibility.Collapsed;
-        //        });
-
-        //    }, locationService.Position.Location.Latitude, locationService.Position.Location.Longitude);
-        //}
-
-        //private void ToggleLoadingText()
-        //{
-        //    this.txtLoading.Visibility = System.Windows.Visibility.Collapsed;
-        //    this.lstVenues.Visibility = System.Windows.Visibility.Visible;
-        //}
-
-        //private void ToggleEmptyText()
-        //{
-        //    if (Venues.Count == 0)
-        //        this.txtEmpty.Visibility = System.Windows.Visibility.Visible;
-        //    else
-        //        this.txtEmpty.Visibility = System.Windows.Visibility.Collapsed;
-        //}
+        private void ToggleEmptyText()
+        {
+            if (CurrentVenue == null)
+                this.txtEmpty.Visibility = System.Windows.Visibility.Visible;
+            else
+                this.txtEmpty.Visibility = System.Windows.Visibility.Collapsed;
+        }
     }
 }

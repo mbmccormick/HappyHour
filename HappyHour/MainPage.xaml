@@ -13,6 +13,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True"
+    toolkit:TiltEffect.IsTiltEnabled="True"
     DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -32,7 +33,7 @@
             <ListBox Name="lstVenues" ItemsSource="{Binding Venues}" Visibility="Collapsed">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="12,0,0,18">
+                        <Grid Margin="12,0,0,18" Tap="Venue_Tap">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
@@ -40,7 +41,6 @@
 
                             <Canvas Grid.Column="0" Margin="0,8,0,0">
                                 <Polygon Points="0,0 30,0 30,30 0,60" Fill="{StaticResource PhoneForegroundBrush}" />
-                                <Rectangle Width="30" Height="30" Fill="{StaticResource PhoneForegroundBrush}" Stroke="{StaticResource PhoneForegroundBrush}" />
                             </Canvas>
                             <TextBlock Grid.Column="0" Text="{Binding Index}" Margin="0,8,12,0" Width="30" TextAlignment="Center" Style="{StaticResource PhoneTextTitle3Style}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Foreground="{StaticResource PhoneBackgroundBrush}" />
 
@@ -60,5 +60,26 @@
             <TextBlock x:Name="txtEmpty" Visibility="Collapsed" TextWrapping="Wrap" Margin="12,-6,0,0" Text="Sorry, could not find any happy hour places nearby." Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource PhoneAccentBrush}" />
         </Grid>
     </Grid>
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
 
 </phone:PhoneApplicationPage>

@@ -111,5 +111,12 @@ namespace HappyHour
 
             LoadData();
         }
+
+        private void Venue_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            Item item = ((FrameworkElement)sender).DataContext as Item;
+
+            App.RootFrame.Navigate(new Uri("/VenuePage.xaml?id=" + (item.Index - 1), UriKind.Relative));
+        }
     }
 }
