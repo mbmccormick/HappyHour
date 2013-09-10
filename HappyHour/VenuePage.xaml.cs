@@ -28,8 +28,8 @@ namespace HappyHour
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (isLoaded == false)
-                LoadData();
+            //if (isLoaded == false)
+            //    LoadData();
         }
 
         //private void LoadData()
