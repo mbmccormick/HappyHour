@@ -29,6 +29,11 @@ namespace HappyHour
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            SystemTray.ProgressIndicator = new ProgressIndicator();
+
+            SystemTray.ProgressIndicator.IsIndeterminate = true;
+            SystemTray.ProgressIndicator.IsVisible = false;
+
             if (isLoaded == false)
                 LoadData();
         }
@@ -38,7 +43,7 @@ namespace HappyHour
             string id;
             if (NavigationContext.QueryString.TryGetValue("id", out id))
             {
-                this.prgLoading.Visibility = System.Windows.Visibility.Visible;
+                SystemTray.ProgressIndicator.IsVisible = true;
 
                 CurrentVenue = MainPage.Venues[Convert.ToInt32(id)];
 
@@ -51,22 +56,22 @@ namespace HappyHour
                     ToggleLoadingText();
                     ToggleEmptyText();
 
-                    this.prgLoading.Visibility = System.Windows.Visibility.Collapsed;
+                    SystemTray.ProgressIndicator.IsVisible = false;
                 });
             }
         }
 
         private void ToggleLoadingText()
         {
-            this.txtLoading.Visibility = System.Windows.Visibility.Collapsed;
+            SystemTray.ProgressIndicator.IsVisible = false;
         }
 
         private void ToggleEmptyText()
         {
             if (CurrentVenue == null)
-                this.txtEmpty.Visibility = System.Windows.Visibility.Visible;
+                SystemTray.ProgressIndicator.IsVisible = true;
             else
-                this.txtEmpty.Visibility = System.Windows.Visibility.Collapsed;
+                SystemTray.ProgressIndicator.IsVisible = false;
         }
     }
 }

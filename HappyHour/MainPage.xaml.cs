@@ -44,13 +44,18 @@ namespace HappyHour
         {
             locationService.Start();
 
+            SystemTray.ProgressIndicator = new ProgressIndicator();
+
+            SystemTray.ProgressIndicator.IsIndeterminate = true;
+            SystemTray.ProgressIndicator.IsVisible = false;
+
             if (isLoaded == false)
                 LoadData();
         }
 
         private void LoadData()
         {
-            this.prgLoading.Visibility = System.Windows.Visibility.Visible;
+            SystemTray.ProgressIndicator.IsVisible = true;
 
             App.HappyHourClient.GetVenues((result) =>
             {
@@ -110,7 +115,7 @@ namespace HappyHour
                     ToggleLoadingText();
                     ToggleEmptyText();
 
-                    this.prgLoading.Visibility = System.Windows.Visibility.Collapsed;
+                    SystemTray.ProgressIndicator.IsVisible = false;
                 });
 
             }, locationService.Position.Location.Latitude, locationService.Position.Location.Longitude);
