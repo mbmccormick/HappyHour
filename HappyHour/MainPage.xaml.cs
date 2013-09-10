@@ -11,6 +11,8 @@ using System.Device.Location;
 using HappyHour.Common;
 using System.Collections.ObjectModel;
 using HappyHour.API.Models;
+using Microsoft.Phone.Maps.Controls;
+using Microsoft.Phone.Maps.Toolkit;
 
 namespace HappyHour
 {
@@ -34,7 +36,7 @@ namespace HappyHour
 
             locationService = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
 
-            locationService.MovementThreshold = 500;
+            locationService.MovementThreshold = 100;
             locationService.PositionChanged += locationService_PositionChanged;
         }
 
@@ -58,6 +60,8 @@ namespace HappyHour
 
                     if (result.groups != null)
                     {
+                        this.mapVenues.Center = locationService.Position.Location;
+
                         this.txtNeighborhood.Text = result.headerLocation.ToUpper();
 
                         List<Item> results = new List<Item>();
@@ -77,6 +81,27 @@ namespace HappyHour
                             i++;
 
                             Venues.Add(item);
+                        }
+
+                        this.mapVenues.Layers.Clear();
+
+                        foreach (Item item in Venues)
+                        {
+                            MapLayer layer = new MapLayer();
+                            this.mapVenues.Layers.Add(layer);
+
+                            TextBlock tb = new TextBlock();
+                            tb.TextAlignment = TextAlignment.Center;
+                            tb.Text = item.Index.ToString();
+
+                            Pushpin pp = new Pushpin();
+                            pp.Content = tb;
+
+                            MapOverlay mo = new MapOverlay();
+                            mo.Content = pp;
+                            mo.GeoCoordinate = new GeoCoordinate(item.venue.location.lat, item.venue.location.lng);
+
+                            layer.Add(mo);
                         }
                     }
 
